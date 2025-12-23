@@ -106,7 +106,7 @@ npm run web
 
 ```
 app/
-├── (tabs)/                  # Grup rute utama menggunakan navigasi tab bawah
+├── (tabs)/                 # Grup rute utama menggunakan navigasi tab bawah
 │   ├── _layout.tsx         # Konfigurasi navigasi tab (ikon, label, dan warna)
 │   ├── admin_panel.tsx     # Dashboard khusus untuk admin mengelola sistem
 │   ├── explore.tsx         # Fitur pencarian dan eksplorasi UMKM secara luas
