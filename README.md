@@ -1,5 +1,5 @@
 # Welcome to Lokal.in
-# Aplikasi Lokal.in Dengan React Native (Expo) & Backend / Database	Supabase (PostgreSQL) 
+# Aplikasi Lokal.in Dengan React Native (Expo) & Backend | Database	Supabase (PostgreSQL) 
 Lokal.in adalah platform mobile berbasis Android/iOS yang bertujuan untuk mendigitalisasi sektor UMKM (Usaha Mikro, Kecil, dan Menengah). Aplikasi ini memudahkan masyarakat untuk menemukan produk lokal terbaik di sekitar mereka dan membantu pelaku UMKM meningkatkan visibilitas bisnis mereka di era digital.
 
 ## Instalasi
