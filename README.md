@@ -59,9 +59,9 @@ npm run web
 
 **Tampilan Aplikasi Lokal.in:**
 **Login & Register**
-            | Login | Register |
-            |-----------|------------|
-            | <img src="Capture-Apk/login.jpeg" width="400"> | <img src="Capture-Apk/regis.jpeg" width="400"> | 
+| Login | Register |
+|-----------|------------|
+| <img src="Capture-Apk/login.jpeg" width="400"> | <img src="Capture-Apk/regis.jpeg" width="400"> | 
 
 **Index**
 | Admin | Seller | Buyer |
