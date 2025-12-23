@@ -6,7 +6,7 @@ Lokal.in adalah platform mobile berbasis Android/iOS yang bertujuan untuk mendig
 
 1. **Clone repository ini**
    ```bash
-   git clone 
+   git clone https://github.com/Ahmadsanusi18/Lokal.in.git
    cd Lokal.in
    ```
 
@@ -130,7 +130,7 @@ app/
 
 **Ahmad Sanusi**
 - GitHub: [@Ahmadsanusi18](https://github.com/Ahmadsanusi18)
-- Repository: []()
+- Repository: [Lokal.in](https://github.com/Ahmadsanusi18/Lokal.in.git)
 - Instagram: [@a.saan_](https://www.instagram.com/a.saan_)
 
 ⭐ Jika Anda menyukai proyek ini, jangan lupa berikan star di GitHub!
