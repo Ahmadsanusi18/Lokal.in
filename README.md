@@ -76,7 +76,7 @@ npm run web
 **Akses Buyer/Pembeli**
 | UMKM | Detail| Ulasan | Favorit | Daftar to Seller |
 |-----------|------------|------------|------------|------------|
-| <img src="Capture-Apk/inti.jpeg" width="400"> | <img src="Capture-Apk/detail.jpeg" width="400"> | <img src="Capture-Apk/ulasan.jpeg" width="400"> | <img src="Capture-Apk/favorit.jpeg" width="400"> | <img src="Capture-Apk/daftar.buyer.jpeg" width="400"> |
+| <img src="Capture-Apk/Inti.jpeg" width="400"> | <img src="Capture-Apk/detail.jpeg" width="400"> | <img src="Capture-Apk/ulasan.jpeg" width="400"> | <img src="Capture-Apk/favorit.jpeg" width="400"> | <img src="Capture-Apk/daftar.buyer.jpeg" width="400"> |
 
 **Akses Seller/Penjual**
 | Toko | Edit |
