@@ -107,46 +107,80 @@ export default function Details() {
     });
   };
 
-  const handleWhatsAppOrder = () => {
+const handleWhatsAppOrder = () => {
     if (!biz?.whatsapp_number) return Alert.alert("Error", "Nomor WhatsApp tidak tersedia.");
     
+    // 1. Membersihkan nomor telepon dan memastikan format 62 (Indonesia)
+    let cleanPhone = biz.whatsapp_number.replace(/\D/g, '');
+    if (cleanPhone.startsWith('0')) {
+      cleanPhone = '62' + cleanPhone.slice(1);
+    }
+
     const itemsInCart = Object.entries(cart);
+    
+    // Nama aplikasi tanpa titik untuk menghindari automatic link preview "Shopping in India"
+    const appDisplayName = "LokalIn"; 
+
     if (itemsInCart.length === 0) {
-        // Jika keranjang kosong, gunakan chat biasa
-        const cleanPhone = biz.whatsapp_number.replace(/\D/g, '');
-        const message = `Halo ${biz?.name}, saya menemukan UMKM Anda di Lokal.in...`;
+        // Pesan chat biasa (Keranjang Kosong)
+        const message = `Halo ${biz?.name}, saya menemukan UMKM Anda di ${appDisplayName}. Ingin bertanya mengenai produknya...`;
         Linking.openURL(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`);
         return;
     }
 
+    // 2. Memproses Data Katalog dengan lebih aman
     let orderList = "";
     let totalPrice = 0;
 
-    const catalogData = biz.catalog.split(',').reduce((acc: any, curr: string) => {
-        const [name, price] = curr.split(':');
-        acc[name.trim()] = parseInt(price?.replace(/\D/g, '') || '0');
+    const catalogData = biz.catalog ? biz.catalog.split(',').reduce((acc: any, curr: string) => {
+        const parts = curr.split(':');
+        if (parts.length >= 2) {
+          const name = parts[0].trim();
+          const priceStr = parts[1].replace(/\D/g, '') || '0';
+          acc[name] = parseInt(priceStr);
+        }
         return acc;
-    }, {});
+    }, {}) : {};
 
+    // 3. Menyusun List Pesanan
     itemsInCart.forEach(([name, qty]) => {
       const price = catalogData[name] || 0;
-      orderList += `- ${name} (${qty}x)\n`;
+      orderList += `• ${name} (${qty}x)\n`;
       totalPrice += (price * qty);
     });
 
-    const cleanPhone = biz.whatsapp_number.replace(/\D/g, '');
-    const message = `Halo ${biz?.name},\nsaya ingin memesan via Lokal.in:\n\n${orderList}\nTotal Estimasi: Rp${totalPrice.toLocaleString('id-ID')}\n\nMohon diproses ya, terima kasih!`;
-    Linking.openURL(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`);
+    // 4. Template Pesanan yang Rapih
+    const fullMessage = 
+`Halo *${biz?.name}*,
+Saya ingin memesan melalui *${appDisplayName}*:
+
+${orderList}
+*Total Estimasi: Rp${totalPrice.toLocaleString('id-ID')}*
+
+Mohon informasinya untuk langkah pembayaran dan pengiriman. Terima kasih!`;
+
+    Linking.openURL(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(fullMessage)}`);
   };
 
   const openMaps = () => {
     if (!biz?.address) return;
-    const encodedQuery = encodeURIComponent(`${biz.name}, ${biz.address}`);
+    
+    const encodedQuery = encodeURIComponent(`${biz.name} ${biz.address}`);
+    
+    // Skema URL yang diperbaiki untuk Android & iOS
     const url = Platform.select({
       ios: `maps:0,0?q=${encodedQuery}`,
       android: `geo:0,0?q=${encodedQuery}`,
     });
-    Linking.openURL(url || '').catch(() => Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${encodedQuery}`));
+
+    Linking.canOpenURL(url!).then((supported) => {
+      if (supported) {
+        return Linking.openURL(url!);
+      } else {
+        // Fallback ke browser jika aplikasi map tidak tersedia
+        return Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${encodedQuery}`);
+      }
+    });
   };
 
   const handleDelete = async () => {
